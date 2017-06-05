@@ -13,27 +13,27 @@ Testing out github
 #install.packages("rvest")
 library(rvest)
 
-url <- "https://shop.lego.com/en-US/Themes"
+url <- "https://www.lego.com/en-us/products"
 html <- read_html(url)
-theme_links <- html %>% html_nodes(".cat-list__see-products") %>% html_attr(name="href")
+theme_links <- html %>% html_nodes("a") %>% html_attr(name = "href")
 theme_links
 ```
 
+This gives us a bunch of extra links that we don't need - we will deal with removing these later. For now, we can just pick one and investigate further. 
+
 ### Great! Now, for a specific group of sets, can we get links to each of the individual set pages?  
 
-We will use 'City' as an example. Test 
+We will use 'City' as an example.
 ```{r}
-theme_url <- paste0("https://shop.lego.com", theme_links[4])
-theme_url_seeall <- paste0(theme_url,"?S1=&all=2&callback=json&cc=us&count=18&do=json-db&i=1&jsonp=jsonCallback&lang=en&pt=shop&q=*&q1=E2034D52-000A-43AB-A026-06F14E7A23C1&q2=setTypesFacetCategory&rank=rankUS&showRetired=false&sort=sort_flags&sp_q_exact_9=us&x1=theme_id&x2=productType_id")
+theme_url <- theme_links[19]
+prod_url <- paste0(theme_url, "/products")
 
-html_theme <- read_html(theme_url_seeall)
-html_theme %>% html_nodes("div") %>% html_attr(name = "href")
-bunch_of_text <- html_theme %>% html_nodes("div") %>% html_text()
+html_prod <- read_html(prod_url)
+html_prod %>% html_nodes("a") %>% html_attr(name = "href")
 
-strsplit(bunch_of_text[224], "ADD TO WISHLIST")
-
-## to get the 'see all' option: 
-## https://shop.lego.com/en-US/City-Sets?S1=&all=2&callback=json&cc=us&count=18&do=json-db&i=1&jsonp=jsonCallback&lang=en&pt=shop&q=*&q1=E2034D52-000A-43AB-A026-06F14E7A23C1&q2=setTypesFacetCategory&rank=rankUS&showRetired=false&sort=sort_flags&sp_q_exact_9=us&x1=theme_id&x2=productType_id
 ```
+
+So this gives us a list of all the links! We only want the ones that come after "/products/" and have one of the product ID numbers associated with them. More on this in the future..  
+
 
 This is where it starts getting messy! So this will probably be the tricky part of getting an automated function. It would be easier if we knew the name of the specific set and had the identifying number, but nothing is ever quite that easy.  
