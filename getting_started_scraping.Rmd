@@ -36,4 +36,15 @@ html_prod %>% html_nodes("a") %>% html_attr(name = "href")
 So this gives us a list of all the links! We only want the ones that come after "/products/" and have one of the product ID numbers associated with them. More on this in the future..  
 
 
-This is where it starts getting messy! So this will probably be the tricky part of getting an automated function. It would be easier if we knew the name of the specific set and had the identifying number, but nothing is ever quite that easy.  
+```{r}
+
+crooks_link <- "https://www.lego.com/en-us/city/products/crooks-island-60131"
+
+html_crook <- read_html(crooks_link)
+crooks_link <- html_crook %>% html_nodes(".shop-button") %>% html_attr(name = "href") 
+crooks_link <- crooks_link[1]
+
+html_crook_page <- read_html(crooks_link)
+html_crook_page %>% html_nodes("p , .product-details__product-code, .product-details__ages, .product-price__sale span") %>% html_text()
+ 
+```
