@@ -21,7 +21,7 @@ theme_links
 
 ### Great! Now, for a specific group of sets, can we get links to each of the individual set pages?  
 
-We will use 'City' as an example.  
+We will use 'City' as an example. Test 
 ```{r}
 theme_url <- paste0("https://shop.lego.com", theme_links[4])
 theme_url_seeall <- paste0(theme_url,"?S1=&all=2&callback=json&cc=us&count=18&do=json-db&i=1&jsonp=jsonCallback&lang=en&pt=shop&q=*&q1=E2034D52-000A-43AB-A026-06F14E7A23C1&q2=setTypesFacetCategory&rank=rankUS&showRetired=false&sort=sort_flags&sp_q_exact_9=us&x1=theme_id&x2=productType_id")
