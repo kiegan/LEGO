@@ -13,9 +13,10 @@ output: html_document
 library(rvest)
 
 url <- "https://www.lego.com/en-us/products"
-#url2 <- "https://brickset.com/browse/sets"
+# url2 <- "https://brickset.com/browse/sets"
 html <- read_html(url)
 theme_links <- html %>% html_nodes("a") %>% html_attr(name = "href")
+# html_text() - will give the text inside the nodes.  
 # the a is for the common reference, the href if for all linkts after this 
 theme_links
 ```
