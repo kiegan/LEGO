@@ -16,7 +16,7 @@ library(rvest)
 url <- "https://www.lego.com/en-us/products"
 html <- read_html(url)
 theme_links <- html %>% html_nodes("a") %>% html_attr(name = "href")
-# the a is for the commone reference, the href if for all linkts after this 
+# the a is for the common reference, the href if for all linkts after this 
 theme_links
 ```
 
